@@ -9,29 +9,19 @@ package main.java;
  */
 public class Length {
     private int number;
+    private Unit unit;
 
-    private String unit;
-
-    public Length(int number, String unit) {
+    public Length(int number, Unit unit) {
         this.number = number;
         this.unit = unit;
-
     }
 
     public int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 
     @Override
@@ -44,25 +34,10 @@ public class Length {
         if (l1.getNumber() == l2.getNumber() && l1.getUnit().equals(l2.getUnit())) {
             return true;
         }
-
         return false;
-
     }
 
     public Length transfer_mm() {
-        if (this.getUnit().equals("m")) {
-            return new Length(getNumber() * 1000, "mm");
-        }
-
-        if (this.getUnit().equals("cm")) {
-            return new Length(getNumber() * 10, "mm");
-        }
-
-        if(this.getUnit().equals("mm")){
-            return this;
-
-        }
-
-        return null;
+        return new Length(number * unit.getRatio(), Unit.MM);
     }
 }
